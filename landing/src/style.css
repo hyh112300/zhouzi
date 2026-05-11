@@ -1,0 +1,607 @@
+/* ========================================
+   zhouzi.icu — Three.js 滚动叙事首页
+   Mobile First 响应式设计
+   ======================================== */
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #0a0a1a;
+  color: #e0e0ff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+/* ---------- App Container ---------- */
+#app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+#app.ready {
+  opacity: 1;
+}
+
+/* ---------- ICP Footer ---------- */
+.icp-footer {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.icp-footer a {
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.icp-footer a:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- UI 叠加层 ---------- */
+/* 阶段标签 */
+.ui-stage-label {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+/* 进度点 */
+.ui-progress-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.ui-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ui-dot.active {
+  background: #8888ff;
+  box-shadow: 0 0 12px rgba(136, 136, 255, 0.6);
+  transform: scale(1.3);
+}
+
+.ui-dot.done {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* 滚动提示 */
+.ui-scroll-hint {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.5s;
+  pointer-events: auto;
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  position: relative;
+}
+
+.scroll-arrow::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  animation: scrollBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.3; }
+}
+
+.scroll-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+}
+
+/* CTA按钮 */
+.ui-cta-button {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: inline-block;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #6666ff, #ff4488);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(102, 102, 255, 0.4);
+}
+
+.ui-cta-button:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(102, 102, 255, 0.6);
+}
+
+/* ---------- 低端设备降级样式 ---------- */
+.fallback-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.fallback-stage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.6s;
+  position: relative;
+  overflow: hidden;
+}
+
+.fallback-stage.active {
+  opacity: 1;
+}
+
+.fallback-title {
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -1px;
+  text-shadow: 0 0 40px rgba(102, 102, 255, 0.5);
+}
+
+.fallback-subtitle {
+  font-size: clamp(14px, 2.5vw, 20px);
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
+  letter-spacing: 4px;
+}
+
+.fallback-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  animation: fallbackBounce 2s infinite;
+}
+
+@keyframes fallbackBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.fallback-text {
+  font-size: clamp(20px, 4vw, 36px);
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 6px;
+}
+
+.fallback-grid {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image:
+    linear-gradient(rgba(102, 102, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102, 102, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.fallback-particle-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(102, 102, 255, 0.15) 0%, transparent 70%);
+}
+
+.fallback-particle-simple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(136, 136, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 40% 70%, rgba(255, 68, 136, 0.6), transparent),
+    radial-gradient(2px 2px at 60% 20%, rgba(136, 136, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 80% 60%, rgba(255, 68, 136, 0.6), transparent),
+    radial-gradient(2px 2px at 10% 80%, rgba(136, 136, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 90% 40%, rgba(136, 136, 255, 0.4), transparent);
+  background-size: 200px 200px;
+}
+
+.fallback-logo-pulse {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6666ff, #ff4488);
+  margin-bottom: 24px;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 60px rgba(102, 102, 255, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(102, 102, 255, 0.4); }
+  50% { transform: scale(1.1); box-shadow: 0 0 80px rgba(102, 102, 255, 0.6); }
+}
+
+.fallback-cta {
+  margin-top: 32px;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #6666ff, #ff4488);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 24px rgba(102, 102, 255, 0.4);
+  pointer-events: auto;
+}
+
+/* ---------- 响应式 ---------- */
+/* 大屏手机 & 小平板 */
+@media (max-width: 768px) {
+  .ui-progress-dots {
+    right: 12px;
+    gap: 8px;
+  }
+
+  .ui-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .ui-stage-label {
+    top: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .ui-cta-button {
+    bottom: 60px;
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+
+  .icp-footer {
+    bottom: 8px;
+    font-size: 10px;
+  }
+}
+
+/* 小屏手机 */
+@media (max-width: 480px) {
+  .ui-scroll-hint {
+    bottom: 40px;
+  }
+
+  .scroll-arrow {
+    width: 16px;
+    height: 26px;
+  }
+
+  .scroll-text {
+    font-size: 10px;
+  }
+
+  .ui-cta-button {
+    padding: 10px 24px;
+    font-size: 13px;
+    bottom: 48px;
+  }
+}
+
+/* 大屏桌面增强 */
+@media (min-width: 1440px) {
+  .ui-progress-dots {
+    right: 40px;
+    gap: 12px;
+  }
+
+  .ui-dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* 无障碍：减少动效 */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-arrow::after,
+  .scroll-text,
+  .ui-cta-button {
+    animation: none;
+    transition: none;
+  }
+
+  .fallback-scroll-indicator {
+    animation: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 打印支持 */
+@media print {
+  #app {
+    display: none;
+  }
+
+  .fallback-content {
+    position: static;
+  }
+
+  .fallback-stage {
+    height: auto;
+    padding: 40px 0;
+    opacity: 1 !important;
+    break-inside: avoid;
+  }
+}
+
+.counter {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.hero {
+  position: relative;
+
+  .base,
+  .framework,
+  .vite {
+    inset-inline: 0;
+    margin: 0 auto;
+  }
+
+  .base {
+    width: 170px;
+    position: relative;
+    z-index: 0;
+  }
+
+  .framework,
+  .vite {
+    position: absolute;
+  }
+
+  .framework {
+    z-index: 1;
+    top: 34px;
+    height: 28px;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
+      scale(1.4);
+  }
+
+  .vite {
+    z-index: 0;
+    top: 107px;
+    height: 26px;
+    width: auto;
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
+      scale(0.8);
+  }
+}
+
+#app {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+#center {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  place-content: center;
+  place-items: center;
+  flex-grow: 1;
+
+  @media (max-width: 1024px) {
+    padding: 32px 20px 24px;
+    gap: 18px;
+  }
+}
+
+#next-steps {
+  display: flex;
+  border-top: 1px solid var(--border);
+  text-align: left;
+
+  & > div {
+    flex: 1 1 0;
+    padding: 32px;
+    @media (max-width: 1024px) {
+      padding: 24px 20px;
+    }
+  }
+
+  .icon {
+    margin-bottom: 16px;
+    width: 22px;
+    height: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+#docs {
+  border-right: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+#next-steps ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  margin: 32px 0 0;
+
+  .logo {
+    height: 18px;
+  }
+
+  a {
+    color: var(--text-h);
+    font-size: 16px;
+    border-radius: 6px;
+    background: var(--social-bg);
+    display: flex;
+    padding: 6px 12px;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+    .button-icon {
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    li {
+      flex: 1 1 calc(50% - 8px);
+    }
+
+    a {
+      width: 100%;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+  }
+}
+
+#spacer {
+  height: 88px;
+  border-top: 1px solid var(--border);
+  @media (max-width: 1024px) {
+    height: 48px;
+  }
+}
+
+.ticks {
+  position: relative;
+  width: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4.5px;
+    border: 5px solid transparent;
+  }
+
+  &::before {
+    left: 0;
+    border-left-color: var(--border);
+  }
+  &::after {
+    right: 0;
+    border-right-color: var(--border);
+  }
+}

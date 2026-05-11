@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+---
+
+# 响应式方案
+
+主流网站的响应式断点调研。
+
+## 断点参考
+
+| 站点 | 移动端断点 | 最大内容区 | 单位 |
+|------|-----------|-----------|------|
+| DeepSeek | 1023px | 774px | px |
+| Kimi | 1280px | 766px | px |
+| ChatGPT | 768px | 760px | rem |
+| 豆包 | 679px | 800px | px |
+| Gemini | 959px | 760px | px |
+
+## 推荐策略
+
+采用 **Mobile First** + 渐进增强：
+
+```css
+/* 基础样式 (移动优先) */
+
+/* ≥ 768px 平板 */
+@media (min-width: 768px) { }
+
+/* ≥ 1024px 桌面 */
+@media (min-width: 1024px) { }
+
+/* ≥ 1440px 大屏 */
+@media (min-width: 1440px) { }
+```

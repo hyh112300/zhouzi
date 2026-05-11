@@ -1,0 +1,86 @@
+name: Deploy to Tencent Cloud
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REMOTE_DIR: /var/www/zhouzi
+
+jobs:
+  deploy-landing:
+    name: Build & Deploy Landing Page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: landing/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd landing
+          npm ci
+
+      - name: Build
+        run: |
+          cd landing
+          npm run build
+
+      - name: Deploy to Tencent Cloud
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
+          REMOTE_USER: root
+          SOURCE: landing/dist/
+          TARGET: ${{ env.REMOTE_DIR }}/landing/dist/
+          EXCLUDE: ""
+          SCRIPT_BEFORE: |
+            mkdir -p ${{ env.REMOTE_DIR }}/landing/dist
+          SCRIPT_AFTER: |
+            echo "Landing page deployed successfully"
+
+  deploy-blog:
+    name: Build & Deploy Blog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: blog/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd blog
+          npm ci
+
+      - name: Build
+        run: |
+          cd blog
+          npm run build
+
+      - name: Deploy to Tencent Cloud
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
+          REMOTE_USER: root
+          SOURCE: blog/build/
+          TARGET: ${{ env.REMOTE_DIR }}/blog/build/
+          EXCLUDE: ""
+          SCRIPT_BEFORE: |
+            mkdir -p ${{ env.REMOTE_DIR }}/blog/build
+          SCRIPT_AFTER: |
+            echo "Blog deployed successfully"

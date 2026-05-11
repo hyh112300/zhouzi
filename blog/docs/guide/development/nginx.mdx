@@ -1,0 +1,53 @@
+---
+sidebar_position: 1
+---
+
+# Nginx
+
+Nginx 配置与最佳实践。
+
+## 基本配置
+
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 静态资源缓存
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+}
+```
+
+## HTTPS 配置
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name example.com;
+
+    ssl_certificate /etc/ssl/cert.pem;
+    ssl_certificate_key /etc/ssl/key.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    # 其他配置...
+}
+```
+
+## 反向代理
+
+```nginx
+location /api/ {
+    proxy_pass http://localhost:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+```

@@ -1,0 +1,46 @@
+---
+sidebar_position: 3
+---
+
+# 服务器
+
+腾讯云服务器初始化与运维记录。
+
+## 初始设置
+
+```bash
+# 更新系统
+apt update && apt upgrade -y
+
+# 安装 Nginx
+apt install nginx -y
+
+# 安装 Node.js 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install nodejs -y
+
+# 验证
+node --version
+npm --version
+```
+
+## 安全配置
+
+```bash
+# 开放端口
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw enable
+
+# 安装 fail2ban
+apt install fail2ban -y
+```
+
+## SSL 证书
+
+使用腾讯云免费 SSL 证书：
+1. 在腾讯云 SSL 证书控制台申请免费证书
+2. 下载 Nginx 版本
+3. 上传到服务器 `/etc/nginx/ssl/`
+4. 配置 Nginx
