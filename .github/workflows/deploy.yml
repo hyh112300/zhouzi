@@ -19,8 +19,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,5 +46,6 @@ jobs:
             git pull origin main
             sudo docker compose -f docker/docker-compose.yml build landing
             sudo docker compose -f docker/docker-compose.yml up -d --no-deps landing
+            sudo systemctl reload-or-restart nginx
             sudo docker compose -f docker/docker-compose.yml exec nginx nginx -s reload || true
             sudo docker image prune -f
