@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  landing:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.landing
+    container_name: zhouzi-landing
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SITE_URL=https://zhouzi.icu
+    healthcheck:
+      test: [CMD, wget, --quiet, --tries=1, --spider, 'http://localhost:3000']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    container_name: zhouzi-nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/letsencrypt:ro
+      - ./nginx/html:/var/www/html:ro
+      - blog-build:/var/www/blog:ro
+      - certbot-data:/var/www/certbot
+    depends_on:
+      - landing
+
+  certbot:
+    image: certbot/certbot
+    container_name: zhouzi-certbot
+    volumes:
+      - ./nginx/ssl:/etc/letsencrypt
+      - certbot-data:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h & wait $${!};
+      done;"
+
+volumes:
+  blog-build:
+  certbot-data:
