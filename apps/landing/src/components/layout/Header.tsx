@@ -27,70 +27,72 @@ export function Header() {
   }, [isMobileOpen])
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-500',
-        isScrolled
-          ? 'glass shadow-sm'
-          : 'bg-transparent',
-      )}
-    >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-lg font-semibold tracking-tight text-text-primary transition-colors hover:text-accent"
-        >
-          {SITE.author}
-        </Link>
+    <>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 transition-colors duration-500 border-b',
+          isScrolled
+            ? 'glass shadow-sm'
+            : 'bg-transparent border-transparent',
+        )}
+      >
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-8">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-lg font-semibold tracking-tight text-text-primary transition-colors hover:text-accent"
+          >
+            {SITE.author}
+          </Link>
 
-        {/* Desktop Nav */}
-        <ul className="hidden items-center gap-1 md:flex">
-          {NAV_ITEMS.map(item => (
-            <li key={item.href}>
-              {item.href.startsWith('/')
-                ? (
-                    <Link
-                      href={item.href}
-                      className="rounded-md px-3 py-2 text-sm text-text-secondary transition-colors hover:text-text-primary"
-                    >
-                      {item.label}
-                    </Link>
-                  )
-                : (
-                    <a
-                      href={item.href}
-                      className="rounded-md px-3 py-2 text-sm text-text-secondary transition-colors hover:text-text-primary"
-                    >
-                      {item.label}
-                    </a>
-                  )}
+          {/* Desktop Nav */}
+          <ul className="hidden items-center gap-1 md:flex">
+            {NAV_ITEMS.map(item => (
+              <li key={item.href}>
+                {item.href.startsWith('/')
+                  ? (
+                      <Link
+                        href={item.href}
+                        className="rounded-md px-3 py-2 text-sm text-text-secondary transition-colors hover:text-text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                    )
+                  : (
+                      <a
+                        href={item.href}
+                        className="rounded-md px-3 py-2 text-sm text-text-secondary transition-colors hover:text-text-primary"
+                      >
+                        {item.label}
+                      </a>
+                    )}
+              </li>
+            ))}
+            <li>
+              <a
+                href={SOCIAL.github}
+                target="_blank"
+                rel="noreferrer"
+                className="ml-2 flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent"
+              >
+                GitHub
+                <ArrowUpRight className="h-3 w-3" />
+              </a>
             </li>
-          ))}
-          <li>
-            <a
-              href={SOCIAL.github}
-              target="_blank"
-              rel="noreferrer"
-              className="ml-2 flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-sm text-text-secondary transition-colors hover:border-accent hover:text-accent"
-            >
-              GitHub
-              <ArrowUpRight className="h-3 w-3" />
-            </a>
-          </li>
-        </ul>
+          </ul>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="relative z-50 flex items-center md:hidden"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </nav>
+          {/* Mobile Menu Button */}
+          <button
+            className="relative z-50 flex items-center md:hidden"
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
+          >
+            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </nav>
+      </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - outside header to avoid backdrop-filter containment */}
       {isMobileOpen && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -121,6 +123,6 @@ export function Header() {
           </a>
         </motion.div>
       )}
-    </header>
+    </>
   )
 }
