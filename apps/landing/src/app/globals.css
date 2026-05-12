@@ -2,25 +2,31 @@
 
 /* ─── Design System Tokens ─── */
 @theme {
-  /* Brand Colors */
+  /* Brand Colors - Warm Gold Accent */
   --color-accent: #d4a853;
   --color-accent-hover: #e8c06a;
-  --color-accent-muted: rgba(212, 168, 83, 0.15);
+  --color-accent-muted: rgba(212, 168, 83, 0.12);
+  --color-accent-glow: rgba(212, 168, 83, 0.06);
+
+  /* Background - layered dark for depth */
   --color-bg-primary: #0a0a0b;
-  --color-bg-surface: #141416;
-  --color-bg-elevated: #1a1a1e;
+  --color-bg-secondary: #0e0e11;
+  --color-bg-surface: #131316;
+  --color-bg-elevated: #19191d;
   --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-light: rgba(255, 255, 255, 0.1);
+
+  /* Text - maximum contrast */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #a8a8a6;
-  --color-glass: rgba(20, 20, 22, 0.8);
+  --color-text-secondary: #a1a1aa;
+  --color-text-tertiary: #71717a;
+
+  --color-glass: rgba(14, 14, 17, 0.85);
 
   /* Typography */
   --font-display: 'Inter Display', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-
-  /* Spacing */
-  --spacing-section: 8rem;
 
   /* Animations */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -28,7 +34,9 @@
 }
 
 /* ─── Base Styles ─── */
-* {
+*,
+*::before,
+*::after {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -54,12 +62,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ─── Selection ─── */
@@ -71,8 +79,8 @@ body {
 /* ─── Glass Effect ─── */
 .glass {
   background: var(--color-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--color-border);
 }
 
@@ -96,8 +104,6 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-/* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

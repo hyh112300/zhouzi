@@ -31,7 +31,7 @@ const RECENT_POSTS: BlogPost[] = [
 
 export function BlogEntry() {
   return (
-    <Section id="blog">
+    <Section id="blog" variant="alt">
       <Container>
         <ScrollReveal>
           <div className="mb-16 text-center">

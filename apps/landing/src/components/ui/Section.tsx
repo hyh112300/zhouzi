@@ -6,9 +6,10 @@ import { cn } from '@/lib/utils'
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
   id: string
+  variant?: 'default' | 'alt'
 }
 
-export function Section({ id, className, children, ...props }: SectionProps) {
+export function Section({ id, className, variant = 'default', children, ...props }: SectionProps) {
   const { ref, inView } = useInView<HTMLElement>({ threshold: 0.05, once: true })
 
   return (
@@ -19,6 +20,7 @@ export function Section({ id, className, children, ...props }: SectionProps) {
         'px-4 py-32 md:px-8 md:py-20 lg:py-32',
         'transition-opacity duration-1000',
         inView ? 'opacity-100' : 'opacity-0',
+        variant === 'alt' ? 'bg-bg-secondary' : 'bg-bg-primary',
         className,
       )}
       {...props}

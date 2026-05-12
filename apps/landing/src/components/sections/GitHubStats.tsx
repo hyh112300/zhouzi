@@ -14,7 +14,7 @@ const STATS = [
 
 export function GitHubStats() {
   return (
-    <Section id="github">
+    <Section id="github" variant="alt">
       <Container>
         <ScrollReveal>
           <div className="mb-16 text-center">

@@ -17,7 +17,7 @@ const QUOTES = [
 
 export function Philosophy() {
   return (
-    <Section id="philosophy">
+    <Section id="philosophy" variant="alt">
       <Container>
         <div className="mx-auto max-w-3xl space-y-16">
           {QUOTES.map((quote, idx) => (

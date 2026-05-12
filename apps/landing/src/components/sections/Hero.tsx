@@ -14,14 +14,12 @@ export function Hero() {
   }, [])
 
   return (
-    <section className="relative flex h-dvh min-h-150 w-full items-center justify-center overflow-hidden">
-      {/* Three.js Canvas */}
+    <section className="relative flex h-dvh min-h-150 w-full items-center justify-center overflow-hidden bg-bg-primary">
+      {/* Three.js Canvas - subtle geometric backdrop */}
       {mounted && <CanvasWrapper />}
 
-      {/* Strong dark overlay for text readability */}
-      <div className="pointer-events-none absolute inset-0 bg-bg-primary/50" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(10,10,11,0)_0%,_rgba(10,10,11,0.9)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/30 to-transparent" />
+      {/* Fade to next section */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-bg-primary to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center md:px-8">
@@ -31,7 +29,7 @@ export function Hero() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <motion.p
-            className="mb-4 text-sm font-medium tracking-widest text-accent uppercase"
+            className="mb-4 text-sm font-medium tracking-[0.2em] text-accent"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -72,7 +70,7 @@ export function Hero() {
       {/* Scroll indicator */}
       <motion.a
         href="#about"
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-text-secondary transition-colors hover:text-accent"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-text-tertiary transition-colors hover:text-accent"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
         transition={{

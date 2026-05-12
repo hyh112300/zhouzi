@@ -16,7 +16,7 @@ const CATEGORIES: { key: SkillCategory, label: string }[] = [
 
 export function Skills() {
   return (
-    <Section id="skills">
+    <Section id="skills" variant="alt">
       <Container>
         <ScrollReveal>
           <div className="mb-16 text-center">

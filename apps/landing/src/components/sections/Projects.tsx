@@ -9,7 +9,7 @@ import { PROJECTS } from '@/lib/constants'
 
 export function Projects() {
   return (
-    <Section id="projects">
+    <Section id="projects" variant="alt">
       <Container>
         <ScrollReveal>
           <div className="mb-16 text-center">
