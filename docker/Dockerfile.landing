@@ -2,28 +2,25 @@ FROM node:22-alpine AS base
 RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
-# --- Dependencies ---
 FROM base AS deps
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json turbo.json ./
 COPY apps/landing/package.json ./apps/landing/
 COPY packages/ ./packages/
 RUN pnpm install --frozen-lockfile
 
-# --- Builder ---
 FROM base AS builder
 COPY --from=deps /app .
 COPY apps/ ./apps/
 RUN pnpm --filter @zhouzi/landing build
 
-# --- Runner ---
 FROM base AS runner
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN addgroup --system --gid 1001 nodejs \
-    && adduser --system --uid 1001 nextjs
-COPY --from=builder /app/apps/landing/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/landing/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/landing/.next/static ./apps/landing/.next/static
+RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+COPY --from=builder /app/apps/landing/.next/standalone ./
+COPY --from=builder /app/apps/landing/.next/static ./apps/landing/.next/static
+RUN mkdir -p apps/landing/public
+RUN chown -R nextjs:nodejs /app
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000
