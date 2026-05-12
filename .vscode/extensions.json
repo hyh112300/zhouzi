@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "vue.volar",
+    "antfu.pnpm-catalog-lens",
+    "antfu.iconify"
+  ]
+}

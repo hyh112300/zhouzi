@@ -1,0 +1,10 @@
+{
+  "name": "@zhouzi/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "base.mjs",
+  "publishConfig": {
+    "access": "public"
+  }
+}

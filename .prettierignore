@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.vitepress/dist/
+dist/
+.turbo/
+.pnpm-store/
+*.svg
+*.png
+*.jpg
+*.ico
+coverage/

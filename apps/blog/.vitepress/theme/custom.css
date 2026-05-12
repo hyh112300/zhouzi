@@ -1,0 +1,68 @@
+/* ─── Blog Theme Customization ─── */
+/* Matches the Landing Page design system */
+
+:root {
+  --vp-c-brand-1: #d4a853;
+  --vp-c-brand-2: #e8c06a;
+  --vp-c-brand-3: #c49a3f;
+
+  --vp-c-bg: #0a0a0b;
+  --vp-c-bg-soft: #141416;
+  --vp-c-bg-mute: #1a1a1e;
+  --vp-c-bg-alt: #141416;
+
+  --vp-c-text-1: #ffffff;
+  --vp-c-text-2: #a8a8a6;
+  --vp-c-text-3: #80807e;
+
+  --vp-c-border: rgba(255, 255, 255, 0.06);
+  --vp-c-divider: rgba(255, 255, 255, 0.06);
+
+  --vp-c-gutter: rgba(255, 255, 255, 0.06);
+
+  --vp-button-brand-bg: #d4a853;
+  --vp-button-brand-text: #0a0a0b;
+  --vp-button-brand-hover-bg: #e8c06a;
+
+  --vp-custom-block-tip-bg: rgba(212, 168, 83, 0.1);
+  --vp-custom-block-tip-text: #d4a853;
+
+  --vp-font-family-base: 'Inter', system-ui, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.dark {
+  --vp-c-bg: #0a0a0b;
+  --vp-c-bg-soft: #141416;
+  --vp-c-bg-mute: #1a1a1e;
+  --vp-c-bg-alt: #141416;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Selection */
+::selection {
+  background: rgba(212, 168, 83, 0.15);
+  color: #d4a853;
+}
+
+/* Remove default VitePress border radius on nav */
+.VPNav {
+  border-bottom: 1px solid var(--vp-c-border) !important;
+}

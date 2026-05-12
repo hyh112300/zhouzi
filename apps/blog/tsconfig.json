@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": ["vitepress/client"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.vue"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+.next/
+dist/
+out/
+.vitepress/dist/
+
+# env
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# turbo
+.turbo/
+
+# cache
+.eslintcache
+.cache/
+tsconfig.tsbuildinfo
+
+# docker
+docker/nginx/ssl/
