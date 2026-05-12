@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.vitepress/dist/
+.turbo/
+.git/
+.gitignore
+*.md
+.env*
