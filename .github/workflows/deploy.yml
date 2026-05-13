@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            rm -rf /home/ubuntu/blog-dist/* /home/ubuntu/blog-dist/.*
+            sudo rm -rf /home/ubuntu/blog-dist/* /home/ubuntu/blog-dist/.*
 
       - name: Upload blog static files
         uses: appleboy/scp-action@v0.1.7
