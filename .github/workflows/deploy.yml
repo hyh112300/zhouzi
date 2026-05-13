@@ -42,8 +42,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            sudo rm -rf /home/ubuntu/blog-dist
-            mkdir -p /home/ubuntu/blog-dist
+            sudo rm -rf /var/www/blog-dist
+            mkdir -p /var/www/blog-dist
 
       - name: Upload blog static files
         uses: appleboy/scp-action@v0.1.7
@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: apps/blog/.vitepress/dist/
-          target: /home/ubuntu/blog-dist
+          target: /var/www/blog-dist
           strip_components: 4
 
       - name: Deploy to server

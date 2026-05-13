@@ -16,10 +16,9 @@ git pull origin main
 # 2. Build blog
 echo "📝 Building blog..."
 pnpm --filter @zhouzi/blog build
-mkdir -p /home/ubuntu/blog-dist
-cp -r apps/blog/.vitepress/dist/* /home/ubuntu/blog-dist/
-sudo chown -R www-data:www-data /home/ubuntu/blog-dist
-sudo chmod -R 755 /home/ubuntu/blog-dist
+sudo rm -rf /var/www/blog-dist
+sudo cp -r apps/blog/.vitepress/dist /var/www/blog-dist
+sudo chown -R www-data:www-data /var/www/blog-dist
 
 # 3. Build and restart Docker services
 echo "🐳 Building and restarting Docker containers..."
