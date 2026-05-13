@@ -35,6 +35,15 @@ jobs:
       - name: Build blog
         run: pnpm --filter @zhouzi/blog build
 
+      - name: Clean blog dist on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            rm -rf /home/ubuntu/blog-dist/* /home/ubuntu/blog-dist/.*
+
       - name: Upload blog static files
         uses: appleboy/scp-action@v0.1.7
         with:
