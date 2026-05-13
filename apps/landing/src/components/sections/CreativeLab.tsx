@@ -45,7 +45,7 @@ export function CreativeLab() {
         <div className="grid gap-6 md:grid-cols-3">
           {EXPERIMENTS.map((exp, idx) => (
             <ScrollReveal key={exp.title} delay={idx * 0.1}>
-              <div className="group relative overflow-hidden rounded-xl border border-border bg-bg-surface/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30">
+              <div className="group relative rounded-xl border border-border bg-bg-surface/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30">
                 <h3 className="text-lg font-semibold transition-colors group-hover:text-accent">
                   {exp.title}
                 </h3>

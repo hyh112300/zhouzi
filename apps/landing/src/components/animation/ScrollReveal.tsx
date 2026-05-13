@@ -39,7 +39,7 @@ export function ScrollReveal({
   }
 
   return (
-    <div ref={ref} className={cn('overflow-hidden', className)}>
+    <div ref={ref} className={cn(className)}>
       <motion.div
         initial={{
           opacity: 0,

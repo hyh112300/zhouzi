@@ -47,8 +47,8 @@ export function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            在工程、设计与创意技术的交汇处，
-            打造沉浸式数字体验。
+            前端工程师 / 创意开发者，
+            探索 Three.js、React 与 Web 技术的无限可能。
           </motion.p>
 
           <motion.div

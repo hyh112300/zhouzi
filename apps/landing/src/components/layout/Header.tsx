@@ -49,7 +49,7 @@ export function Header() {
           <ul className="hidden items-center gap-1 md:flex">
             {NAV_ITEMS.map(item => (
               <li key={item.href}>
-                {item.href.startsWith('/')
+                {item.href.startsWith('/') && item.href !== '/blog'
                   ? (
                       <Link
                         href={item.href}

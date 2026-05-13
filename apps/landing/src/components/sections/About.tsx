@@ -24,16 +24,15 @@ export function About() {
           <ScrollReveal direction="right" delay={0.15}>
             <div className="space-y-5 text-text-secondary leading-relaxed">
               <p className="text-lg">
-                一名前端工程师，热衷于构建高性能、美观且沉浸式的 Web 体验。
-                深耕 React、TypeScript 与 Three.js，
-                在工程与艺术之间架起桥梁。
+                前端工程师，四年金融科技经验，
+                深耕 Vue 与 React 生态，现专注 Three.js 沉浸式体验。
               </p>
               <p>
-                我的工作涵盖从复杂 Web 应用的架构设计到创意 WebGL 体验的打造。
-                信奉整洁的代码、深思熟虑的设计，以及服务于目标的技术。
+                曾就职于某科技公司，负责大型金融系统的前端开发。
               </p>
               <p>
-                目前正在探索 AI 驱动开发、空间计算界面以及不断演进的 Web 平台的前沿。
+                信奉整洁的代码与服务于目标的技术，
+                不断探索 Web 平台的前沿。
               </p>
             </div>
           </ScrollReveal>

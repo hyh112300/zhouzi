@@ -37,6 +37,7 @@ pnpm-debug.log*
 .eslintcache
 .cache/
 tsconfig.tsbuildinfo
+**/.vitepress/cache/
 
 # docker
 docker/nginx/ssl/

@@ -13,16 +13,24 @@ cd "$PROJECT_DIR"
 echo "📦 Pulling latest code..."
 git pull origin main
 
-# 2. Build and restart Docker services
+# 2. Build blog
+echo "📝 Building blog..."
+pnpm --filter @zhouzi/blog build
+mkdir -p /home/ubuntu/blog-dist
+cp -r apps/blog/.vitepress/dist/* /home/ubuntu/blog-dist/
+sudo chown -R www-data:www-data /home/ubuntu/blog-dist
+sudo chmod -R 755 /home/ubuntu/blog-dist
+
+# 3. Build and restart Docker services
 echo "🐳 Building and restarting Docker containers..."
 sudo docker compose -f docker/docker-compose.yml build landing
 sudo docker compose -f docker/docker-compose.yml up -d --no-deps landing
 
-# 3. Reload Nginx
+# 4. Reload Nginx
 echo "🔄 Reloading Nginx..."
 sudo docker compose -f docker/docker-compose.yml exec nginx nginx -s reload || true
 
-# 4. Clean up old images
+# 5. Clean up old images
 echo "🧹 Cleaning up..."
 sudo docker image prune -f
 

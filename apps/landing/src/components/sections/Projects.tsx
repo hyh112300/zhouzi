@@ -25,7 +25,7 @@ export function Projects() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((project, idx) => (
             <ScrollReveal key={project.title} delay={idx * 0.1}>
-              <div className="group relative overflow-hidden rounded-xl border border-border bg-bg-surface/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5">
+              <div className="group relative rounded-xl border border-border bg-bg-surface/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5">
                 <div className="space-y-4">
                   <h3 className="text-xl font-semibold transition-colors group-hover:text-accent">
                     {project.title}
