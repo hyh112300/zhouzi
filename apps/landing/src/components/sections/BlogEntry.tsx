@@ -14,18 +14,18 @@ const RECENT_POSTS: BlogPost[] = [
     description:
       '深入探讨如何使用 R3F 和自定义着色器创建高性能 WebGL 应用。',
     date: '2026-04-15',
-    href: '/blog/posts/building-immersive-3d-experiences',
+    href: '/blog/posts/building-3d-experiences',
     tags: ['Three.js', 'React', 'WebGL'],
     readingTime: '12 分钟',
   },
   {
-    title: 'Web 高性能动画的艺术',
+    title: 'Hello, World — 欢迎来到我的博客',
     description:
-      '探索在视觉表现与性能之间取得平衡的动画技术。',
-    date: '2026-03-20',
-    href: '/blog/posts/art-of-performant-animations',
-    tags: ['性能优化', 'CSS', 'Framer Motion'],
-    readingTime: '8 分钟',
+      '欢迎来到我的新博客，这里将分享前端工程、创意编程与技术的思考。',
+    date: '2026-05-01',
+    href: '/blog/posts/hello-world',
+    tags: ['meta', 'introduction'],
+    readingTime: '3 分钟',
   },
 ]
 

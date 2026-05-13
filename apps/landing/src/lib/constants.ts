@@ -3,7 +3,7 @@ import type { Experience, Project, Skill } from '@/types'
 export const SITE = {
   title: '肘子',
   description:
-    '前端工程师，专注于 Three.js、React 与创意编程，打造沉浸式数字体验。',
+    '前端工程师 / 创意开发者，探索 Three.js 沉浸式体验与创意编程。',
   url: 'https://zhouzi.icu',
   author: 'Zhouzi',
   icp: '京ICP备2026025149号',
@@ -11,7 +11,7 @@ export const SITE = {
 
 export const SOCIAL = {
   github: 'https://github.com/hyh112300',
-  email: 'mailto:hi@zhouzi.icu',
+  email: 'mailto:hyh112300@163.com',
 } as const
 
 export const NAV_ITEMS = [
@@ -27,10 +27,15 @@ export const SKILLS: Skill[] = [
   // Frontend
   { name: 'React', category: 'frontend' },
   { name: 'Next.js', category: 'frontend' },
+  { name: 'Vue 2/3', category: 'frontend' },
   { name: 'TypeScript', category: 'frontend' },
   { name: 'Three.js', category: 'frontend' },
   { name: 'TailwindCSS', category: 'frontend' },
   { name: 'Framer Motion', category: 'frontend' },
+  { name: 'Vant', category: 'frontend' },
+  { name: 'ElementUI', category: 'frontend' },
+  { name: 'uni-app', category: 'frontend' },
+  { name: 'ECharts', category: 'frontend' },
   // Backend
   { name: 'Node.js', category: 'backend' },
   { name: 'Python', category: 'backend' },
@@ -49,32 +54,51 @@ export const SKILLS: Skill[] = [
 
 export const EXPERIENCES: Experience[] = [
   {
-    company: 'Current',
-    role: '前端工程师',
+    company: '个人项目',
+    role: '全栈开发者',
     period: '2024 — 至今',
-    description: '使用前沿技术构建现代 Web 应用。',
+    description: '构建个人品牌与创意项目。',
     highlights: [
-      '使用 Next.js 和 React 架构并构建高性能 Web 应用',
-      '基于 Three.js 和 WebGL 开发沉浸式 3D 体验',
-      '主导前端架构决策与代码审查',
-      '搭建 CI/CD 流水线与自动化部署工作流',
+      'Next.js 15 + Three.js + TypeScript 构建个人网站',
+      'Three.js / R3F 沉浸式 3D 交互体验',
+      'CI/CD 流水线与 Docker 自动化部署',
+      'AI 驱动开发工作流',
     ],
   },
   {
-    company: 'Previous',
-    role: '软件工程师',
-    period: '2022 — 2024',
-    description: '全栈开发，聚焦 React 生态与 Node.js。',
+    company: '北京宇信科技集团',
+    role: '前端开发工程师',
+    period: '2022.06 — 2025.06',
+    description: '银行金融系统前端开发。',
     highlights: [
-      '构建并维护多个生产级应用',
-      '优化应用性能，Lighthouse 评分 95+',
-      '实现桌面端与移动端的完整响应式适配',
-      '与设计团队协作打造直观的用户界面',
+      'Vue 2/3 + Vant/ElementUI 构建邮储/北京银行系统',
+      '产业贷核心模块重构（额度预测→绑卡激活全流程）',
+      '修复通话监听逻辑，解决 30% 外呼记录丢失',
+      '抽离公共组件，报表开发效率提升 40%',
+      'uni-App 三端协同移动办公平台',
     ],
   },
 ]
 
 export const PROJECTS: Project[] = [
+  {
+    title: '掌上银行家管理平台',
+    description:
+      '银行内部管理平台，客户画像、资产分析、外呼任务与资质审核，支持 3000+ 职员。',
+    tags: ['Vue 2', 'ElementUI', 'ECharts', 'JavaScript'],
+  },
+  {
+    title: '掌上银行家移动工作台',
+    description:
+      '理财经理移动办公平台，uni-App 三端协同，外呼任务闭环与资产查询。',
+    tags: ['uni-app', 'Vue 3', 'ECharts', 'Cross-platform'],
+  },
+  {
+    title: '邮储银行微信银行',
+    description:
+      '微信公众号金融服务平台，账户查询、贷款申请、企业对账等。',
+    tags: ['Vue 2', 'Vant', 'Vuex', '微信JS-SDK'],
+  },
   {
     title: 'Zhouzi.icu',
     description:
