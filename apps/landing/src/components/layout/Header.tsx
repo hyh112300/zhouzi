@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { NAV_ITEMS, SITE, SOCIAL } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { ThemeToggle } from './ThemeToggle'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -68,6 +69,9 @@ export function Header() {
                     )}
               </li>
             ))}
+            <li>
+              <ThemeToggle />
+            </li>
             <li>
               <a
                 href={SOCIAL.github}
