@@ -43,7 +43,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             sudo rm -rf /var/www/blog-dist
-            mkdir -p /var/www/blog-dist
+            sudo mkdir -p /var/www/blog-dist
+            sudo chown ubuntu:ubuntu /var/www/blog-dist
 
       - name: Upload blog static files
         uses: appleboy/scp-action@v0.1.7
