@@ -35,12 +35,17 @@ jobs:
       - name: Build blog
         run: pnpm --filter @zhouzi/blog build
 
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Upload blog static files
+        uses: appleboy/scp-action@v0.1.7
         with:
-          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: apps/blog/.vitepress/dist/
+          target: /home/ubuntu/blog-dist
+          strip_components: 4
 
-      - name: Deploy landing page (Docker)
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -53,13 +58,3 @@ jobs:
             sudo docker compose -f docker/docker-compose.yml up -d --no-deps landing
             sudo docker compose -f docker/docker-compose.yml exec nginx nginx -s reload || true
             sudo docker image prune -f
-
-      - name: Deploy blog (static files)
-        run: |
-          rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            apps/blog/.vitepress/dist/ \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/ubuntu/blog-dist/
-          ssh -o StrictHostKeyChecking=no \
-            ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} \
-            "sudo chown -R www-data:www-data /home/ubuntu/blog-dist && sudo chmod -R 755 /home/ubuntu/blog-dist"
