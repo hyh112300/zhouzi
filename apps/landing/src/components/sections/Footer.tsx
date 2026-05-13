@@ -18,6 +18,12 @@ export function Footer() {
               {SITE.author}
               .
               {' '}
+              <img
+                src="/beian-icon.png"
+                alt=""
+                className="inline-block h-3.5 w-auto align-text-bottom"
+              />
+              {' '}
               {SITE.icp}
             </p>
           </div>

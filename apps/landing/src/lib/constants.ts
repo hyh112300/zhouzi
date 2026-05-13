@@ -6,7 +6,7 @@ export const SITE = {
     '前端工程师 / 创意开发者，探索 Three.js 沉浸式体验与创意编程。',
   url: 'https://zhouzi.icu',
   author: 'Zhouzi',
-  icp: '京ICP备2026025149号',
+  icp: '京ICP备2026025149号 | 京公网安备11011202101828号',
 } as const
 
 export const SOCIAL = {
