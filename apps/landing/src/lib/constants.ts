@@ -66,13 +66,13 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
   {
-    company: '北京宇信科技集团',
+    company: '某科技公司',
     role: '前端开发工程师',
     period: '2022.06 — 2025.06',
     description: '银行金融系统前端开发。',
     highlights: [
-      'Vue 2/3 + Vant/ElementUI 构建邮储/北京银行系统',
-      '产业贷核心模块重构（额度预测→绑卡激活全流程）',
+      'Vue 2/3 + Vant/ElementUI 构建金融系统',
+      '核心业务模块重构（额度预测→绑卡激活全流程）',
       '修复通话监听逻辑，解决 30% 外呼记录丢失',
       '抽离公共组件，报表开发效率提升 40%',
       'uni-App 三端协同移动办公平台',
@@ -82,30 +82,30 @@ export const EXPERIENCES: Experience[] = [
 
 export const PROJECTS: Project[] = [
   {
-    title: '掌上银行家管理平台',
-    description:
-      '银行内部管理平台，客户画像、资产分析、外呼任务与资质审核，支持 3000+ 职员。',
-    tags: ['Vue 2', 'ElementUI', 'ECharts', 'JavaScript'],
-  },
-  {
-    title: '掌上银行家移动工作台',
-    description:
-      '理财经理移动办公平台，uni-App 三端协同，外呼任务闭环与资产查询。',
-    tags: ['uni-app', 'Vue 3', 'ECharts', 'Cross-platform'],
-  },
-  {
-    title: '邮储银行微信银行',
-    description:
-      '微信公众号金融服务平台，账户查询、贷款申请、企业对账等。',
-    tags: ['Vue 2', 'Vant', 'Vuex', '微信JS-SDK'],
-  },
-  {
     title: 'Zhouzi.icu',
     description:
       '个人网站，融合沉浸式 3D 体验、Next.js 与创意编程技术。',
     tags: ['Next.js', 'Three.js', 'TypeScript', 'Framer Motion'],
     href: 'https://zhouzi.icu',
     github: 'https://github.com/hyh112300/zhouzi',
+  },
+  {
+    title: '某银行管理平台',
+    description:
+      '银行内部管理平台，客户画像、资产分析、外呼任务与资质审核。',
+    tags: ['Vue 2', 'ElementUI', 'ECharts', 'JavaScript'],
+  },
+  {
+    title: '某银行移动工作台',
+    description:
+      '理财经理移动办公平台，uni-App 三端协同，外呼任务闭环与资产查询。',
+    tags: ['uni-app', 'Vue 3', 'ECharts', 'Cross-platform'],
+  },
+  {
+    title: '某微信银行项目',
+    description:
+      '微信公众号金融服务平台，账户查询、贷款申请、企业对账等。',
+    tags: ['Vue 2', 'Vant', 'Vuex', '微信JS-SDK'],
   },
 ]
 

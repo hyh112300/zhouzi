@@ -24,12 +24,11 @@ export function About() {
           <ScrollReveal direction="right" delay={0.15}>
             <div className="space-y-5 text-text-secondary leading-relaxed">
               <p className="text-lg">
-                前端工程师，三年金融科技经验，
+                前端工程师，四年金融科技经验，
                 深耕 Vue 与 React 生态，现专注 Three.js 沉浸式体验。
               </p>
               <p>
-                曾就职于北京宇信科技，负责邮储银行微信银行及北京银行掌上银行家
-                等大型金融系统的前端开发。
+                曾就职于某科技公司，负责大型金融系统的前端开发。
               </p>
               <p>
                 信奉整洁的代码与服务于目标的技术，
