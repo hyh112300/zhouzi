@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Header } from '@/components/layout/Header'
 import { SmoothScrollProvider } from '@/components/layout/SmoothScrollProvider'
+import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { Footer } from '@/components/sections/Footer'
 import { SITE } from '@/lib/constants'
 import './globals.css'
@@ -81,15 +82,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-CN" className="dark">
+    <html lang="zh-CN" className="dark" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-body bg-bg-primary text-text-primary antialiased`}
       >
-        <SmoothScrollProvider>
-          <Header />
-          <main className="relative">{children}</main>
-          <Footer />
-        </SmoothScrollProvider>
+        <ThemeProvider>
+          <SmoothScrollProvider>
+            <Header />
+            <main className="relative">{children}</main>
+            <Footer />
+          </SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

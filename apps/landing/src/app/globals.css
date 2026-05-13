@@ -52,6 +52,27 @@ body {
   overflow-x: hidden;
 }
 
+/* ─── Light Theme ─── */
+.light {
+  --color-accent: #c49a3f;
+  --color-accent-hover: #b88a30;
+  --color-accent-muted: rgba(196, 154, 63, 0.12);
+  --color-accent-glow: rgba(196, 154, 63, 0.06);
+
+  --color-bg-primary: #f8f8f6;
+  --color-bg-secondary: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-light: rgba(0, 0, 0, 0.12);
+
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6b6b;
+  --color-text-tertiary: #999999;
+
+  --color-glass: rgba(255, 255, 255, 0.85);
+}
+
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
   width: 4px;
@@ -70,10 +91,22 @@ body {
   background: rgba(255, 255, 255, 0.15);
 }
 
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
 /* ─── Selection ─── */
 ::selection {
   background: var(--color-accent-muted);
   color: var(--color-accent);
+}
+
+.light ::selection {
+  color: #ffffff;
 }
 
 /* ─── Glass Effect ─── */

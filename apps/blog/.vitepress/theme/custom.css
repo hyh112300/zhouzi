@@ -1,7 +1,38 @@
 /* ─── Blog Theme Customization ─── */
 /* Matches the Landing Page design system */
 
+/* ─── Light Theme (default) ─── */
 :root {
+  --vp-c-brand-1: #d4a853;
+  --vp-c-brand-2: #c49a3f;
+  --vp-c-brand-3: #b88a30;
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-soft: #f9f9f9;
+  --vp-c-bg-mute: #f1f1f1;
+  --vp-c-bg-alt: #f9f9f9;
+
+  --vp-c-text-1: #1a1a1a;
+  --vp-c-text-2: #666666;
+  --vp-c-text-3: #999999;
+
+  --vp-c-border: rgba(0, 0, 0, 0.08);
+  --vp-c-divider: rgba(0, 0, 0, 0.08);
+  --vp-c-gutter: rgba(0, 0, 0, 0.08);
+
+  --vp-button-brand-bg: #d4a853;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-hover-bg: #c49a3f;
+
+  --vp-custom-block-tip-bg: rgba(212, 168, 83, 0.1);
+  --vp-custom-block-tip-text: #8a6d2a;
+
+  --vp-font-family-base: 'Inter', system-ui, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Dark Theme ─── */
+.dark {
   --vp-c-brand-1: #d4a853;
   --vp-c-brand-2: #e8c06a;
   --vp-c-brand-3: #c49a3f;
@@ -17,25 +48,12 @@
 
   --vp-c-border: rgba(255, 255, 255, 0.06);
   --vp-c-divider: rgba(255, 255, 255, 0.06);
-
   --vp-c-gutter: rgba(255, 255, 255, 0.06);
 
-  --vp-button-brand-bg: #d4a853;
   --vp-button-brand-text: #0a0a0b;
   --vp-button-brand-hover-bg: #e8c06a;
 
-  --vp-custom-block-tip-bg: rgba(212, 168, 83, 0.1);
   --vp-custom-block-tip-text: #d4a853;
-
-  --vp-font-family-base: 'Inter', system-ui, sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
-}
-
-.dark {
-  --vp-c-bg: #0a0a0b;
-  --vp-c-bg-soft: #141416;
-  --vp-c-bg-mute: #1a1a1e;
-  --vp-c-bg-alt: #141416;
 }
 
 /* Custom scrollbar */
