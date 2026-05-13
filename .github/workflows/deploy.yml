@@ -35,6 +35,11 @@ jobs:
       - name: Build blog
         run: pnpm --filter @zhouzi/blog build
 
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
       - name: Deploy landing page (Docker)
         uses: appleboy/ssh-action@v1
         with:
