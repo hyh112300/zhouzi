@@ -10,6 +10,9 @@ services:
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_SITE_URL=https://zhouzi.icu
+      # 微信 JS-SDK 签名（/play 路由）。值来自 docker/.env（勿提交真实 AppSecret）
+      - WECHAT_APPID=${WECHAT_APPID:-}
+      - WECHAT_SECRET=${WECHAT_SECRET:-}
     healthcheck:
       test: [CMD-SHELL, "node -e \"require('http').get('http://127.0.0.1:3000',r=>{process.exit(r.statusCode===200?0:1)}).on('error',()=>process.exit(1))\""]
       interval: 30s
