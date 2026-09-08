@@ -15,6 +15,8 @@ declare global {
 
 export default function PlayPage() {
   const [logs, setLogs] = useState<string[]>([])
+  const [ready, setReady] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -49,14 +51,8 @@ export default function PlayPage() {
 
       window.wx!.config({ ...cfg, jsApiList: ['getLocation'] })
       window.wx!.ready(() => {
-        safe('wx.ready，调用 getLocation...')
-        window.wx!.getLocation({
-          type: 'gcj02',
-          success: (r: { latitude: number, longitude: number, accuracy: number }) =>
-            safe(`OK: lat=${r.latitude}  lng=${r.longitude}  accuracy=${r.accuracy}m`),
-          fail: (err: { errMsg?: string }) =>
-            safe(`getLocation 失败: ${err?.errMsg ?? JSON.stringify(err)}`),
-        })
+        safe('wx.ready: JS-SDK 就绪，请点击按钮获取定位')
+        if (!cancelled) setReady(true)
       })
       window.wx!.error(err => safe(`wx.error: ${JSON.stringify(err)}`))
     }
@@ -66,6 +62,20 @@ export default function PlayPage() {
       cancelled = true
     }
   }, [])
+
+  const handleGetLocation = () => {
+    if (!window.wx || loading) return
+    setLoading(true)
+    setLogs(prev => [...prev, '调用 getLocation...'])
+    window.wx.getLocation({
+      type: 'gcj02',
+      success: (r: { latitude: number, longitude: number, accuracy: number }) =>
+        setLogs(prev => [...prev, `OK: lat=${r.latitude}  lng=${r.longitude}  accuracy=${r.accuracy}m`]),
+      fail: (err: { errMsg?: string }) =>
+        setLogs(prev => [...prev, `getLocation 失败: ${err?.errMsg ?? JSON.stringify(err)}`]),
+      complete: () => setLoading(false),
+    })
+  }
 
   return (
     <div
@@ -79,8 +89,26 @@ export default function PlayPage() {
     >
       <h1 style={{ fontSize: 20, marginBottom: 8 }}>微信 H5 定位测试（/play）</h1>
       <p style={{ color: '#888', marginBottom: 16 }}>
-        用微信打开本页。依次展示：config → ready → getLocation 结果与精度。
+        用微信打开本页。初始化完成后，点击下方按钮请求定位：
       </p>
+      <div style={{ marginBottom: 16 }}>
+        <button
+          type="button"
+          onClick={handleGetLocation}
+          disabled={!ready || loading}
+          style={{
+            padding: '8px 16px',
+            fontSize: 14,
+            borderRadius: 6,
+            border: 'none',
+            background: ready && !loading ? '#07c160' : '#444',
+            color: '#fff',
+            cursor: ready && !loading ? 'pointer' : 'not-allowed',
+          }}
+        >
+          {loading ? '定位中...' : ready ? '获取定位' : 'SDK 初始化中...'}
+        </button>
+      </div>
       <pre
         style={{
           whiteSpace: 'pre-wrap',
