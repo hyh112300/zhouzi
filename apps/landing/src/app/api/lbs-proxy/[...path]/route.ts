@@ -1,10 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import process from 'node:process'
+import { NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ path: string[] }> }
+  { params }: { params: Promise<{ path: string[] }> },
 ) {
   // 等待 Next.js 15 的 params 解析
   await params
@@ -13,7 +15,7 @@ export async function GET(
   if (!key) {
     return NextResponse.json(
       { status: 500, message: '服务端未配置 TENCENT_LBS_KEY' },
-      { status: 500 }
+      { status: 500 },
     )
   }
 
@@ -38,14 +40,14 @@ export async function GET(
       status: res.status,
       headers: {
         'content-type':
-          res.headers.get('content-type') ||
-          'application/javascript; charset=utf-8',
+          res.headers.get('content-type')
+          || 'application/javascript; charset=utf-8',
       },
     })
   } catch (err) {
     return NextResponse.json(
       { status: 500, message: (err as Error).message },
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

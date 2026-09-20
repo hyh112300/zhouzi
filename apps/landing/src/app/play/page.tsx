@@ -18,7 +18,7 @@ declare global {
               timeout?: number
               highAccuracy?: boolean
               maximumAge?: number
-            }
+            },
           ) => void
         }
       }
@@ -99,7 +99,7 @@ export default function PlayPage() {
       {
         timeout: 6000,
         highAccuracy: false,
-      }
+      },
     )
   }
 
