@@ -13,6 +13,8 @@ services:
       # 微信 JS-SDK 签名（/play 路由）。值来自 docker/.env（勿提交真实 AppSecret）
       - WECHAT_APPID=${WECHAT_APPID:-}
       - WECHAT_SECRET=${WECHAT_SECRET:-}
+      # 腾讯位置服务（Node 端代理 /api/lbs-proxy）
+      - TENCENT_LBS_KEY=${TENCENT_LBS_KEY:-}
     healthcheck:
       test: [CMD-SHELL, "node -e \"require('http').get('http://127.0.0.1:3000',r=>{process.exit(r.statusCode===200?0:1)}).on('error',()=>process.exit(1))\""]
       interval: 30s
