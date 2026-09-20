@@ -71,7 +71,8 @@ jobs:
             cd /home/ubuntu/zhouzi
             git pull origin main
             if [ -n "$TENCENT_LBS_KEY" ]; then
-              touch docker/.env
+              sudo touch docker/.env
+              sudo chown ubuntu:ubuntu docker/.env
               grep -q "^TENCENT_LBS_KEY=" docker/.env && sed -i "s/^TENCENT_LBS_KEY=.*/TENCENT_LBS_KEY=$TENCENT_LBS_KEY/" docker/.env || echo "TENCENT_LBS_KEY=$TENCENT_LBS_KEY" >> docker/.env
             fi
             sudo docker compose -f docker/docker-compose.yml build landing
