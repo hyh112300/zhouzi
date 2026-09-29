@@ -6,11 +6,11 @@ import { Section } from '@/components/ui/Section'
 
 const QUOTES = [
   {
-    text: '技术的最佳状态，是让人们更紧密地联系在一起。',
+    text: '技术的理想境界，是让人们更紧密地联系在一起。',
     author: '— 设计哲学',
   },
   {
-    text: '简洁是终极的优雅。',
+    text: '至简即是优雅。',
     author: '— 工程原则',
   },
 ]
